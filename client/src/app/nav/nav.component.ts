@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../models/user';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavComponent implements OnInit {
   model:any={};
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private toastrService : ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +19,7 @@ export class NavComponent implements OnInit {
       console.log(response);
     },
     error =>{
+      this.toastrService.error(error.error)
       console.log(error.error);
     });
   }
